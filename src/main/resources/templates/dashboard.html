@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini FaceBook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+            crossorigin="anonymous"/>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+    />
+    <!-- Bootstrap JS Requirements -->
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"
+    ></script>
+    <!-- My css -->
+    <link rel="stylesheet" th:href="@{dashboard.css}"/>
+</head>
+<body>
+<span th:with="mess=${session.message}">
+        <div th:if="${mess} != null">
+            <div class="alert alert-success" role="alert">
+                <div th:text="${mess}"></div>
+            </div>
+        </div>
+    </span>
+<div class="navbar navbar-expand-lg navbar-success bg-dark">
+    <div class="navbar_left">
+        <img class="navbar_logo" src="assets/facebook.png" alt="logo" />
+        <div class="input-icons">
+            <i class="fas fa-search icon"></i>
+            <input class="input-field" type="text" placeholder="Search on Facebook"/>
+        </div>
+    </div>
+
+    <div class="navbar_center">
+        <a class="active_icon" href="#">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="#">
+            <i class="fas fa-user-friends"></i>
+        </a>
+        <a href="#">
+            <i class="far fa-play-circle"></i>
+        </a>
+        <a href="#">
+            <i class="fas fa-archive"></i>
+        </a>
+    </div>
+
+    <div class="navbar_right">
+        <div class="navbar_right_profile">
+            <img src="assets/profile.png" alt="profile" />
+            <span> Welcome<h3 style="color: blue; font-size: 20px" th:text="${user.getFirstname()}"></h3></span>
+        </div>
+        <div class="navbar_right_links">
+            <!-- <i class="fas fa-plus"></i> -->
+            <i class="fab fa-facebook-messenger"></i>
+<!--            <i class="fas fa-bell"></i>-->
+            <a th:href="@{/logout}" style="font-size: 4px;">Logout<i class="fas fa-arrow-down"></i></a>
+        </div>
+    </div>
+</div>
+<!-- navbar ends -->
+<!-- content starts -->
+<div class="content">
+    <div class="content_left">
+        <ul>
+            <li>
+                <a href="#">
+                    <img src="assets/profile.png" alt="profile" />
+                    <span><p th:text="${user.getSurname()+' '+user.getFirstname()}"></p></span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/covid.png" alt="covid" />
+                    <span>COVID-19 Information Center</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/friends.png" alt="friends" />
+                    <span>Friends</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/groups.png" alt="groups" /> <span>Groups</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/marketplace.png" alt="marketplace" />
+                    <span>Marketplace</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/videos.png" alt="videos" /> <span>Videos</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"><img src="assets/events.png" alt="events" /> <span>Events</span></a>
+            </li>
+            <li>
+                <a href="#"><img src="assets/memories.png" alt="memories" /><span>Memories</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"><img src="assets/saved.png" alt="saved" /> <span>Saved</span>
+                </a>
+            </li>
+
+            <li>
+                <i class="fas fa-arrow-down"></i><span class="see_more">See More</span>
+            </li>
+            <div class="border"></div>
+            <h3 class="shortcut_title">Your shortcuts</h3>
+            <div class="shortcuts_wrapper">
+                <a href="#">
+                    <img src="assets/shortcuts.jpg" alt="shortcuts" />
+                    <span>Cebu Perfumes And Accessories</span>
+                </a>
+            </div>
+        </ul>
+    </div>
+
+    <div class="content_center">
+        <div class="stories">
+            <img src="https://picsum.photos/id/137/110/200" alt="" />
+            <img src="https://picsum.photos/id/247/110/200" alt="" />
+            <img src="https://picsum.photos/id/522/110/200" alt="" />
+            <img src="https://picsum.photos/id/231/110/200" alt="" />
+            <img src="https://picsum.photos/id/537/110/200" alt="" />
+            <img src="https://picsum.photos/id/237/110/200" alt="" />
+        </div>
+        <div class="media_container">
+            <div class="share">
+               <form th:action="@{/processPost}" th:object="${post}" method="post" enctype="multipart/form-data" >
+                <div class="share_upSide">
+                    <img src="assets/profile.png" alt="profile" />
+                    <input name="postTItle" type="text" placeholder="Post Title" th:field="*{postTitle}" required/>
+                </div>
+                <div class="share_upSide">
+                    <img src="assets/profile.png" alt="profile" />
+                    <input type="text" name="postBody" placeholder="What's on your mind?" th:field="*{postBody}"
+                    required/>
+                </div>
+                <div class="share_upSide">
+                    <img src="assets/profile.png" alt="profile" />
+                    <input type="file"  name="file" id="file" />
+                </div>
+                <hr />
+                <div class="share_downSide">
+                    <button style="background-color: inherit" type="submit" class="share_downSide_link photo-video-icon">
+                        <i class="fas fa-upload "></i>
+                        <span>Upload Post</span>
+                    </button>
+                </div>
+                </form>
+            </div>
+
+            <!-- news feed -->
+            <div class="news_feed scroller like-icon">
+                <span th:each="post : ${posts}">
+                <div class="news_feed_title">
+                    <img src="assets/user.png" alt="user" />
+                    <div class="news_feed_title_content">
+<!--                        <p th:text="${post.getPostTitle()}"></p><hr><br>-->
+                        <span>Posted By <p th:text="${post.getPosterName()}"></p></span>
+                        <span>12h . <i class="fas fa-globe-americas"></i></span>
+                    </div>
+                </div>
+                <div class="news_feed_description">
+                    <p class="news_feed_subtitle" th:text="${post.getPostTitle()}">
+                    </p>
+<!--                     <img  th:src="@{${post.getPostImagename()}}" alt="sunflower" />-->
+                    <div  th:if="${post.getPostImagename() != '/image/'}">
+<!--                    <img src="assets/sunflower.jpg"  alt="sunflower" />-->
+                    <img  th:src="@{${post.getPostImagename()}}"/>
+                    </div>
+                    <div  th:if="${post.getPostImagename() == '/image/'}" class="news_feed_subtitle">
+                       <img style="display:none;height: 0px; margin-top: -100px;" th:src="@{${post.getPostImagename()}}"
+                            class="news_feed_subtitle"/>
+                    </div>
+                    <div class="news_feed_description_title">
+                        <p th:text="${post.getPostBody()}">
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="likes_area">
+                    <div class="emojis">
+                        <img src="assets/emoji_like.png" alt="like" />
+                        <img src="assets/emoji_surprised.png" alt="surprised" />
+                        <img src="assets/emoji_angry.png" alt="angry" />
+                        <span></span>
+                    </div>
+                    <div class="comment_counts">
+                       <span>
+<!--                           <span th:text="${post.getCommentCount()}"></span> -->
+                           Comments </span>
+                        <span>
+<!--                            <span class="likes" th:text="${post.getLikeCount()}"></span>-->
+                            Likes</span>
+                    </div>
+                </div>
+                <div class="likes_buttons">
+                    <div class="likes_buttons_links like">
+                        <i th:onclick="'like('+${post.getId()}+', '+${user.getId()}+')'" th:id="${post.getId()}" style="color: #ffffff;"
+                           class="fa fa-thumbs-o-up" aria-hidden="true">
+                            <span class="likes" th:text="${post.getLikeCount()}"></span>
+                                    <span style="display:none;" class="thumb" th:text="${post.getId()}"></span></i>
+                        <p style="display: none" class="userLiked" th:text="${post.isLiked()}"></p>
+                        <span>Like</span>
+                    </div>
+                    <div class="likes_buttons_links comment">
+                        <i class="far fa-comment-alt" aria-hidden="true" th:onclick="'com('+${post.getId()}+', '+${post.getCommentCount()}+')'"
+                        style="cursor: pointer">
+                            <span th:text="${post.getCommentCount()}"></span>
+                        </i>
+                        <span>Comment</span>
+                    </div>
+                    <div class="likes_buttons_links">
+                        <i class="fas fa-share" th:onclick="'edit('+${post.getId()}+')'" style="cursor: pointer"></i>
+                        <span>Edit</span>
+                    </div>
+                    <div class="likes_buttons_links">
+                        <i class="fa fa-times fa-5x" id="delete" th:onclick="'del('+${post.getId()}+')'" style="cursor: pointer"></i>
+                        <span>Delete</span>
+                    </div>
+                </div>
+
+                    <!--    Comment Form for Writing and submitting comments  -->
+            <div class="share">
+                <form th:action="@{/commentPost}" th:object="${commentData}" method="post" enctype="multipart/form-data">
+            <div class="share_upSide">
+                <input style="display:none" type="text" name="postId" th:value="${post.getId()}"/>
+                <img src="assets/profile.png" alt="profile" />
+                <input type="text" name="content"placeholder="Make a comment" th:field="*{content}"
+                       required/>
+            </div>
+
+            <div class="share_downSide">
+                <button style="background-color: inherit" type="submit" class="share_downSide_link photo-video-icon">
+                    <i class="fas fa-upload " style="color: yellowgreen"></i>
+                    <span>Comment</span>
+                </button>
+            </div>
+                </form>
+            </div>
+                    <!--    Comment Form for Writing and submitting comments  -->
+                    <div class="divider"><hr /></div>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content_right">
+        <div class="content_right_inner">
+            <div class="your_pages">
+                <h3>Your Pages</h3>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <ul>
+                <li>
+                    <a href="#">
+                        <img
+                                class="your_page_logo"
+                                src="assets/codersbite.png"
+                                alt="codersbite"
+                        />
+                        <span>Codersbite</span>
+                    </a>
+                </li>
+                <li class="content_right_small_text">
+                    <a href="#">
+                        <i class="fas fa-bell"></i>
+                        <span>5 Notifications</span>
+                    </a>
+                </li>
+                <li class="content_right_small_text">
+                    <a href="#">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Create Promotion</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="content_right_divider"></div>
+            <div class="birthdays">
+                <h3>Birthdays</h3>
+            </div>
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="assets/gift-box.png" alt="gift-box" />
+                        <span>Jary Garson's birthday is today</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="content_right_divider"></div>
+            <div class="contacts">
+                <h3>Contacts</h3>
+                <div class="contact_icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            <ul>
+                <li>
+                    <a href="#">
+                        <img src="assets/avatar1.png" alt="user" />
+                        <span>John Doe</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="assets/avatar2.png" alt="user" />
+                        <span>Zorah Makey</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="assets/avatar5.png" alt="user" />
+                        <span>Kero Janre</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="assets/avatar3.png" alt="user" />
+                        <span>Ube Yuri</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="assets/avatar4.png" alt="user" />
+                        <span>Hosaa Mora</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"
+></script>
+<script src="https://use.fontawesome.com/aed9ef824b.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script th:src="@{home.js}"></script>
+</body>
+</html>

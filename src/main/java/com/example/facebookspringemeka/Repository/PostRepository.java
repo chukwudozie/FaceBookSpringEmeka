@@ -1,0 +1,17 @@
+package com.example.facebookspringemeka.Repository;
+
+import com.example.facebookspringemeka.Models.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+    List<Post> findAllByPostStateOrderByPostIdDesc(String checker);
+    List<Post> findPostByPostId(Long postId);
+    Post findPostByPostIdAndUserId(Long postId, Long userId);
+////    Post findPostByPostIdAndUser_Id(Long postId, Long userId);
+//    Post findPostByUserIdAndAndPostId(Long userId, Long postId);
+
+}
